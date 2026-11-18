@@ -1,3 +1,3 @@
-![Component diagram](component.png)
+![Component diagram](component2.png)
 
-![Sequence diagram](sequence.png)
+![Sequence diagram](sequence2.png)
