@@ -1,5 +1,5 @@
 @startuml sequence
-title Increment Service - Sequence Diagram
+title Sequence Diagram
 
 participant "Client" as C
 participant "Web Server" as W
