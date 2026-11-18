@@ -1,5 +1,5 @@
 @startuml component
-title Increment Service — Component Diagram
+title Increment Service - Component Diagram
 skinparam componentStyle uml2
 
 component "Client" as Client
