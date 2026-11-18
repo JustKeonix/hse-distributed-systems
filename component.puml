@@ -1,0 +1,23 @@
+@startuml component
+title Increment Service — Component Diagram
+skinparam componentStyle uml2
+
+component "Client" as Client
+component "Web Server" as Web
+component "Application Server" as App
+database "Database" as DB {
+  frame "processed_numbers" as T1
+  frame "error_log" as T2
+}
+
+() "HTTP\nPOST" as IWeb
+() "HTTP" as IApp
+() "SQL" as IDb
+
+Client .> IWeb : <<use>>
+IWeb - Web
+Web .> IApp : <<use>>
+IApp - App
+App .> IDb : <<use>>
+IDb - DB
+@enduml

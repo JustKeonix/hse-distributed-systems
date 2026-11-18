@@ -1,0 +1,26 @@
+@startuml sequence
+title Increment Service — Sequence Diagram
+
+participant "Client" as C
+participant "Web Server" as W
+participant "Application Server" as A
+database "Database" as DB
+
+C -> W : POST {"number": n}
+W -> A : forward request
+A -> DB : SELECT number FROM processed_numbers\nWHERE number IN (n, n + 1)
+DB --> A : matching rows
+
+alt n found (exception #1)
+  A -> DB : INSERT INTO error_log (number, error)\nVALUES (n, 'ALREADY_RECEIVED')
+  A --> W : error "number already received"
+else n + 1 found (exception #2)
+  A -> DB : INSERT INTO error_log (number, error)\nVALUES (n, 'ONE_LESS_THAN_PROCESSED')
+  A --> W : error "number is one less than a processed number"
+else no match
+  A -> DB : INSERT INTO processed_numbers (number)\nVALUES (n)
+  A --> W : n + 1
+end
+
+W --> C : response
+@enduml
